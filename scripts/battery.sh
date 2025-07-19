@@ -4,7 +4,6 @@ battery_path="/sys/class/power_supply/BAT0"
 
 # Verifica si existe una batería
 if [ ! -d "$battery_path" ]; then
-    echo "%{F#9E9E9E} No Battery%{F-}"
     exit 0
 fi
 

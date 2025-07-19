@@ -1,8 +1,16 @@
 #!/bin/bash
 
+battery_path="/sys/class/power_supply/BAT0"
+
+# Verifica si existe una batería
+if [ ! -d "$battery_path" ]; then
+    echo "%{F#9E9E9E} No Battery%{F-}"
+    exit 0
+fi
+
 # Obtiene el nivel de la batería y el estado de carga
-battery_level=$(cat /sys/class/power_supply/BAT0/capacity)
-charging_status=$(cat /sys/class/power_supply/BAT0/status)
+battery_level=$(cat "$battery_path/capacity")
+charging_status=$(cat "$battery_path/status")
 
 # Determina el icono y el color según el nivel de batería y el estado
 if [ "$charging_status" = "Charging" ]; then
